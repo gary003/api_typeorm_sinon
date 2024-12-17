@@ -6,6 +6,7 @@
   "main": "./src/bin/server.ts",
   "scripts": {
     "build": "npx tsc -p .",
+    "launch-app": "npx node ./dist/bin/server.js",
     "start": "npx tsc -p . && npx node ./dist/bin/server.js",
     "start-pm2": "npx tsc -p . && npx pm2 start ./dist/bin/server.js -i 0",
     "stop-pm2": "npx pm2 stop all",
@@ -47,7 +48,6 @@
     "@types/uuid": "^8.3.4",
     "c8": "^9.1.0",
     "chai": "^4.3.6",
-    "eslint": "^9.5.0",
     "globals": "^15.6.0",
     "mocha": "^10.0.0",
     "nodemon": "^2.0.14",

@@ -1,3 +1,5 @@
+CREATE DATABASE my_database_user_w;
+
 drop table if exists wallet;
 drop table if exists user;
 
@@ -23,9 +25,8 @@ create table wallet(
 );
 
 insert into wallet(walletId, userId, hardCurrency, softCurrency) 
-  values 
+  values
   ("515f73c2-027d-11ed-b939-0242ac120002", "22ef5564-0234-11ed-b939-0242ac120002", 1000, 1240),
   ("698f73c2-027d-11ed-b939-0242ac120002", "35269564-0234-11ed-b939-0242ac120002", 250, 450),
   ("412cddd2-027d-11ed-b939-0242ac120002", "14523564-0234-11ed-b939-0242ac120002", 850, 750),
   ("96373dc2-027d-11ed-b939-0242ac120002", "68965564-0234-11ed-b939-0242ac120002", 950, 650);
-

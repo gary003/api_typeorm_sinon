@@ -4,18 +4,29 @@ services:
   app:
     build: .
     ports:
-      - "8080:8080" # Map container port 8080 to host port 8080
+      - "8080:8080"
     depends_on:
-      - redis # Wait for Redis to be ready before starting your app
+      - db # Add dependency on the database
+    environment: # Add database connection environment variables
+      - POSTGRES_HOST=db # Important: Use the service name as the hostname
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=my_database_user_w
+      - POSTGRES_PORT=5432 #optional but good practice
 
-  # Redis service
-  redis:
-    image: redis:latest # Use the official Redis image
+  db: # Add the database service
+    build:
+      context: ./src/v1/infrastructure/persistance # Path to your DB Dockerfile
+      dockerfile: Dockerfile # Name of your Dockerfile (if not named Dockerfile, use dockerfile: <filename>)
+    image: postgres:15 # Use a specific version for consistency
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DB=my_database_user_w
     ports:
-      - "6379:6379" # Map container port 6379 (default Redis port) to host port 6379
+      - "5432:5432" # Expose the port for external connections (optional, for debugging/tools)
     volumes:
-      - redis-data:/data # Persist Redis data (optional)
+      - db-data:/var/lib/postgresql/data # Persist database data
 
 volumes:
-  # Optional volume to persist Redis data
-  redis-data: {}
+  db-data: {} # Volume for database data persistence
