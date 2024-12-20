@@ -1,4 +1,6 @@
-CREATE DATABASE my_database_user_w;
+CREATE DATABASE IF NOT EXISTS mydbuser;
+
+USE mydbuser;
 
 drop table if exists wallet;
 drop table if exists user;
@@ -8,6 +10,7 @@ create table user(
   firstname varchar(50),
   lastname varchar(50)
 );
+
 
 insert into user(userId, firstname, lastname) 
   values 

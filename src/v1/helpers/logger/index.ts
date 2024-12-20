@@ -15,6 +15,8 @@ logger.rejections.handle(new transports.File({ filename: "rejections.log" }))
 
 if (process.env.NODE_ENV === "production") {
   logger.level = "error"
+  logger.add(new transports.Console())
+
   logger.add(
     new transports.File({
       level: "error",

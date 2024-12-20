@@ -22,7 +22,7 @@ export const getAllUsersDB = async (): Promise<userInfo[]> => {
 
   if (!result) throw new Error("Impossible to retreive any user")
 
-  // logger.debug(JSON.stringify(result))
+  logger.debug(JSON.stringify(result))
 
   return result as userInfo[]
 }

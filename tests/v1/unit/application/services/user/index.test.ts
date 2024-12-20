@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config()
-
 import * as modUserDB from "../../../../../../src/v1/infrastructure/persistance/user"
 import * as modWalletDB from "../../../../../../src/v1/infrastructure/persistance/wallet"
 import * as modUser from "../../../../../../src/v1/application/services/user/index"

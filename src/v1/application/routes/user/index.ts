@@ -20,7 +20,9 @@ userRouter
 
     if (results === null) return res.status(500).json(errorAPIUSER.errorAPIGetAllUsers)
 
-    const apiRes: apiResponseGetAllUserType = { data: results as userInfo[]}
+    console.log(results)
+
+    const apiRes: apiResponseGetAllUserType = { data: results as userInfo[] }
 
     return res.status(200).json(apiRes)
   })

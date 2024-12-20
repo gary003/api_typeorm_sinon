@@ -1,32 +1,27 @@
 version: "3.8"
 
 services:
-  app:
+  app25:
     build: .
     ports:
       - "8080:8080"
     depends_on:
-      - db # Add dependency on the database
-    environment: # Add database connection environment variables
-      - POSTGRES_HOST=db # Important: Use the service name as the hostname
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_DB=my_database_user_w
-      - POSTGRES_PORT=5432 #optional but good practice
-
-  db: # Add the database service
-    build:
-      context: ./src/v1/infrastructure/persistance # Path to your DB Dockerfile
-      dockerfile: Dockerfile # Name of your Dockerfile (if not named Dockerfile, use dockerfile: <filename>)
-    image: postgres:15 # Use a specific version for consistency
+      - db25
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=mysecretpassword
-      - POSTGRES_DB=my_database_user_w
-    ports:
-      - "5432:5432" # Expose the port for external connections (optional, for debugging/tools)
-    volumes:
-      - db-data:/var/lib/postgresql/data # Persist database data
+      - DB_DRIVER=postgres
+      - DB_HOST=db25
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=mysecretpassword
+      - DB_DATABASE_NAME=mydbuser
+      - DB_PORT=5432 
 
-volumes:
-  db-data: {} # Volume for database data persistence
+  db25: 
+    image: postgres:latest
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_DATABASE_NAME=mydbuser
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/tmp/:/docker-entrypoint-initdb.d/

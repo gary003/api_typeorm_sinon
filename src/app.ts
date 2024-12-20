@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require("dotenv").config()
-
 import express from "express"
 import userRoute from "./v1/application/routes/user/index"
 
@@ -13,11 +10,11 @@ import logger from "./v1/helpers/logger"
 
 const app = express()
 
-app.use("/apiDoc", swaggerUi.serve, swaggerUi.setup(apiDocumentation))
-
 app.use(helmet())
 app.use(cors())
 app.use(express.json())
+
+app.use("/apiDoc", swaggerUi.serve, swaggerUi.setup(apiDocumentation))
 
 app.use("/api/v1/user", userRoute)
 
@@ -63,6 +60,5 @@ app.use(handleNotFound)
 
 // Error handler middleware
 app.use(handleError)
-
 
 export default app
